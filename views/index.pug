@@ -1,5 +1,82 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}.
+  div(class='carousel slide' id='crsl')
+    div(class='carousel-inner')
+      div(class='carousel1 carousel-item active')
+        div(class='carousel-caption text-start')
+          h1(class="carousel1_title")
+            | Welcome to Citizen Assembly!
+          h4(class="carousel1_text")
+            | Citizen Assembly is a global community of people
+            | aiming to praise democratic values and freedom of
+            | expression, as well as make a change!
+
+      div(class='carousel2 carousel-item')
+        div(class='carousel-caption text-start')
+          h1(class="carousel2_title")
+            | Power to the People!
+          h4(class="carousel2_text")
+            | We host online and in-real citizen assemblies
+            | where we discuss and debate a wide variety of
+            | topics to make our world better.
+
+      div(class='carousel3 carousel-item')
+        div(class='carousel-caption text-start')
+          h1(class="carousel3_title")
+            | Join us now!
+          h4(class="carousel3_text")
+            | Help build a better democratic world by joining our
+            | citizen assemblies! Scroll down to see a list of our
+            | meetup groups and our calendar.
+
+      button(class="carousel-control-prev", type="button", data-bs-target="#crsl", data-bs-slide="prev")
+        span(class="carousel-control-prev-icon")
+        span(class="visually-hidden") Previous
+
+      button(class="carousel-control-next", type="button", data-bs-target="#crsl", data-bs-slide="next")
+        span(class="carousel-control-next-icon")
+        span(class="visually-hidden") Next
+    </button>
+
+
+  div(style='width: 100%; margin: 2rem 0 0 0; padding: 0px; text-align: center;')
+
+
+  div(class="container marketing")
+    div(class="text-center")
+      h2
+        | What is Citizen Assembly?
+      p
+        br
+        | Watch our promotional video to learn what we do at Citizen
+        br
+        | Assembly and how you can join us.
+        br
+
+    div(style='width: 100%; height: 25rem; margin: 2rem 0 2rem 0; padding: 0px; text-align: center;')
+      iframe(type='text/html', width='100%', height='100%', style="max-width: 700px;",
+        src='https://www.youtube.com/embed/8zwmtHo8hfM?autoplay=1',
+        frameborder='0')
+
+    hr(class="featurette-divider")
+
+    div(class="row")
+      div(class="col-lg-4")
+        img(class="rounded-circle", style="width: 140px; height: 140px;", src="images/our_team.jpg")
+        h2 Our Team
+        p Meet with our Citizen Assembly leaders
+        p
+          a(class="btn btn-secondary") Meet the team
+      div(class="col-lg-4")
+        img(class="rounded-circle", style="width: 140px; height: 140px;", src="images/our_calendar.jpg")
+        h2 Our Calendar
+        p Check out our meeting schedule
+        p
+          a(class="btn btn-secondary") Open calendar
+      div(class="col-lg-4")
+        img(class="rounded-circle", style="width: 140px; height: 140px;", src="images/our_videos.jpg")
+        h2 Our Videos
+        p Watch out videos on our facebook page
+        p
+          a(class="btn btn-secondary") Watch videos

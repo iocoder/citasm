@@ -1,8 +1,126 @@
+/* -------------------------------------------------- */
+/*  CUSTOMIZE THE BODY                                */
+/* -------------------------------------------------- */
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-top: 3rem;
+  padding-bottom: 0px;
 }
 
-a {
-  color: #00B7FF;
+/* -------------------------------------------------- */
+/*  CUSTOMIZE THE CAROUSEL                            */
+/* -------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 0px;
+}
+
+.carousel-item {
+  height: 25rem;
+}
+
+.carousel-caption {
+  bottom: 2rem;
+  z-index: 10;
+}
+
+.carousel-control-prev-icon {
+ background-image: url("/images/carousel_left.png") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("/images/carousel_right.png") !important;
+}
+
+.carousel1 {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1)
+    ),
+    url("/images/carousel1_bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel2 {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1)
+    ),
+    url("/images/carousel2_bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel3 {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1)
+    ),
+    url("/images/carousel3_bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel1_title {
+  color: Yellow;
+}
+
+.carousel1_text {
+  color: lightyellow;
+}
+
+.carousel2_title {
+  color: Yellow;
+}
+
+.carousel2_text {
+  color: lightyellow;
+}
+
+.carousel3_title {
+  color: Yellow;
+}
+
+.carousel3_text {
+  color: lightyellow;
+}
+
+/* -------------------------------------------------- */
+/*  CUSTOMIZE MARKETING CONTENT                       */
+/* -------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.marketing h2 {
+  font-weight: 400;
+}
+
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+
+/* -------------------------------------------------- */
+/*  CUSTOMIZE THE FEATURETTES                         */
+/* -------------------------------------------------- */
+
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  /* rtl:remove */
+  letter-spacing: -.05rem;
 }
