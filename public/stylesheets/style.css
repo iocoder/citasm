@@ -57,18 +57,28 @@ body {
   margin-right: 5px;
   display: inline-block;
   background-size: cover;
+  background-position: center;
 }
 .nav-icon-home {
   background-image: url("/images/icon_home.png");
 }
+.nav-icon-team {
+  background-image: url("/images/icon_team.png");
+}
 .nav-icon-calendar {
   background-image: url("/images/icon_calendar.png");
 }
-.nav-icon-findus {
-  background-image: url("/images/icon_findus.png");
+.nav-icon-videos {
+  background-image: url("/images/icon_videos.png");
 }
-.nav-icon-team {
-  background-image: url("/images/icon_team.png");
+.nav-icon-meetups {
+  background-image: url("/images/icon_meetups.png");
+}
+.nav-icon-partners {
+  background-image: url("/images/icon_partners.png");
+}
+.nav-icon-admin {
+  background-image: url("/images/icon_admin.png");
 }
 .nav-icon-donate {
   background-image: url("/images/icon_donate.png");
