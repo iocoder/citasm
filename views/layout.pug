@@ -1,49 +1,100 @@
 doctype html
 html
+  // *******************************************************************
+  // *                          HTML HEAD                              *
+  // *******************************************************************
   head
+  
+    // PAGE TITLE
     title Citizen Assembly
 
+    // PAGE METADATA
     meta(name='viewport' content='width=device-width, initial-scale=1')
     meta(name='description' content='Citizen Assembly')
     meta(name='author' content='Cezary Jurewicz')
 
+    // PAGE LINKS
+    link(rel='shortcut icon', type='image/png', href='/images/favicon.png')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    header
-      nav(class='navbar navbar-expand navbar-dark fixed-top bg-dark')
-        div(class='container-fluid')
-          a(class='navbar-brand', href='/')
-            span(style="margin-left: 20px; margin-right: 30px;") Citizen Assembly
-          ul(class='navbar-nav me-auto mb-2 mb-md-0')
-            li(class='nav-item nav-link active')
-              img(src="/images/icon_home.png", style="height:30px;")
-              span(style="vertical-align: middle; margin-left: 3px;") Home
-            li(class='nav-item nav-link')
-              img(src="/images/icon_calendar.png", style="height:30px;")
-              span(style="vertical-align: middle; margin-left: 3px;") Calendar
-            li(class='nav-item nav-link')
-              img(src="/images/icon_findus.png", style="height:30px;")
-              span(style="vertical-align: middle; margin-left: 3px;") Find Us
-            li(class='nav-item nav-link')
-              img(src="/images/icon_team.png", style="height:30px;")
-              span(style="vertical-align: middle; margin-left: 3px;") Our Team
-            li(class='nav-item nav-link')
-              img(src="/images/icon_donate.png", style="height:30px;")
-              span(style="vertical-align: middle; margin-left: 3px;") Donate
-          a(class='navbar-brand')
-            img(src="/images/logo_top.png", style="height:40px;")
 
+  // *******************************************************************
+  // *                          HTML BODY                              *
+  // *******************************************************************
+  body
+
+    // =================================================================
+    // =                       BODY HEADER                             =
+    // =================================================================
+    header
+
+      // NAVIGATION BAR
+      nav.navbar.navbar-expand-lg.navbar-dark.fixed-top.bg-dark
+
+        // MENU BOTTON
+        button.navbar-toggler.collapsed(type="button",
+                                        data-bs-toggle="collapse",
+                                        data-bs-target="#navbarList",
+                                        aria-controls="navbarCollapse",
+                                        aria-expanded="false",
+                                        aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+
+        // BRAND NAME
+        div.navbar-brand Citizen Assembly
+
+        // NAVIGATION MENU
+        div#navbarList.navbar-collapse.collapse
+          ul.navbar-nav
+            li.nav-item
+              a.d-flex.nav-link(href="/", class="active")
+                div.nav-icon.nav-icon-home
+                span.nav-text Home
+            li.nav-item
+              a.d-flex.nav-link(href="/")
+                div.nav-icon.nav-icon-calendar
+                span.nav-text Calendar
+            li.nav-item
+              a.d-flex.nav-link(href="/")
+                div.nav-icon.nav-icon-findus
+                span.nav-text Find Us
+            li.nav-item
+              a.d-flex.nav-link(href="/")
+                div.nav-icon.nav-icon-team
+                span.nav-text Our Team
+            li.nav-item
+              a.d-flex.nav-link(href="/")
+                div.nav-icon.nav-icon-donate
+                span.nav-text Donate
+
+        // LOGO
+        div.navbar-logo
+
+    // =================================================================
+    // =                        BODY MAIN                              =
+    // =================================================================
     main
       block content
 
-    footer(class="bg-dark text-center text-white" style="padding-top: 1rem; padding-bottom: 0.5rem;")
-      span(style="font-style: italic;")
-        | Copyright (C) &nbsp;
-        span(style="color: GreenYellow;") Citizen Assembly
-        br
-        | General Public License v3
-        br
-      img(src="/images/logo_bottom.png", style="height:40px;")
+    // =================================================================
+    // =                       BODY FOOTER                             =
+    // =================================================================
+    footer
+    
+      // FOOTER BOX
+      div.text-center.bg-dark.footer-container
 
+        // FOOTER TEXT
+        p.text-white.footer-text
+          | Copyleft (C) &nbsp;
+          span.footer-brand Citizen Assembly
+          br
+          | General Public License v3
+
+        // FOOTER BRAND
+        div.footer-logo
+
+    // =================================================================
+    // =                     BOOTSTRAP SCRIPT                          =
+    // =================================================================
     script(src='/javascripts/bootstrap.min.js')
