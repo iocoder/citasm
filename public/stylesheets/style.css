@@ -36,6 +36,7 @@ body {
 .navbar-brand {
   margin-left: 15px;
   font-size: 13pt;
+  cursor: default;
 }
 
 /* navigation bar: navigation menu */
@@ -160,6 +161,8 @@ body {
 .quickies {
   width: 100%;
   text-align: center;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 /* quick link icon circles */
@@ -203,14 +206,34 @@ body {
   margin-top: 3rem;
 }
 
-/* promotional video iframe which contains youtube part */
-.video {
+/* promotional video description text */
+.promo-text  {
+  max-width: 500px;
+  display: inline-block;
+}
+
+/* promotional video box which contains youtube part */
+.promo-video {
   width: 90vw;
-  height: 90vw;
+  height: 80vw;
   max-width: 700px;
   max-height: 450px;
   margin-top: 1rem;
   margin-bottom: 0rem;
+  display: inline-block;
+}
+
+/* promotional video thumbnail */
+.promo-thumb {
+  background-image: url('/images/video-thumb.png');
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+/* hide youtube frame under the thumbnail */
+.promo-youtube {
+  display: none;
 }
 
 /* -------------------------------------------------- */

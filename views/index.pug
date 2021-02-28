@@ -116,19 +116,32 @@ block content
   // PROMO CONTAINER
   div.text-center.promo
   
-    // HEADING TO GRAB ATTENTION
-    h2
-      | What is Citizen Assembly?
+    // PROMO VIDEO INTRODUCTION TEXT
+    div.promo-text
+      h2
+        | What is Citizen Assembly?
+      p
+        br
+        | Watch our 1-minute promotional video to learn more about 
+        | what we do at Citizen Assembly and how you can join us.
+        br
 
-    // INFO ABOUT PROMO
-    p
-      br
-      | Watch our promotional video to learn what we do at Citizen
-      br
-      | Assembly and how you can join us.
-      br
+    // INSERT NEW LINE
+    br
+
+    // VIDEO THUMBNAIL
+    div.promo-video.promo-thumb(
+      onclick="this.nextElementSibling.style.display='inline-block'; \
+               this.style.display='none'")
 
     // YOUTUBE VIDEO
-    iframe.video(type='text/html',
-                 src='https://www.youtube.com/embed/8zwmtHo8hfM?autoplay=1',
-                 frameborder='0')
+    iframe.promo-video.promo-youtube(
+      type='text/html',
+      src='https://www.youtube.com/embed/8zwmtHo8hfM',
+      frameborder='0')
+
+  // ---------------------------------------------------------------
+  // -                       DIVIDER LINE                          -
+  // ---------------------------------------------------------------
+
+  hr(class="divider")
