@@ -7,10 +7,10 @@ var router = express.Router();
 /* specifiy what to do when we get a GET request */
 router.get('/', function(req, res, next) {
   /* page data to be passed to the HTML renderer */
-  res.locals.home = 'active';
+  res.locals.team = 'active';
 
   /* render HTML page as response */
-  res.render('index');
+  res.render('team');
 });
 
 /* return the new router */
