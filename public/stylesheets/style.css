@@ -86,6 +86,38 @@ body {
 }
 
 /* -------------------------------------------------- */
+/*  CUSTOMIZE THE FOOTER                              */
+/* -------------------------------------------------- */
+
+/* footer box */
+.footer-container {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* the text inside footer box */
+.footer-text {
+  padding: 0;
+  margin: 0;
+}
+
+/* Citizen Assembly name in the footer */
+.footer-brand {
+  color: GreenYellow;
+}
+
+/* Citizen Assembly logo in the footer */
+.footer-logo {
+  width: 100px;
+  height: 40px;
+  display: inline-block;
+  background: url('/images/logo_bottom.png');
+  background-size: cover;
+}
+
+/* -------------------------------------------------- */
 /*  CUSTOMIZE THE CAROUSEL                            */
 /* -------------------------------------------------- */
 
@@ -137,6 +169,7 @@ body {
 .carousel-caption {
   bottom: 2rem;
   z-index: 10;
+  cursor: default;
 }
 .carousel-title {
   color: Yellow;
@@ -237,34 +270,57 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*  CUSTOMIZE THE FOOTER                              */
+/*  CUSTOMIZE MEETUP GROUPS                           */
 /* -------------------------------------------------- */
 
-/* footer box */
-.footer-container {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.meetup {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.meetup-thumb {
   width: 100%;
-}
-
-/* the text inside footer box */
-.footer-text {
-  padding: 0;
-  margin: 0;
-}
-
-/* Citizen Assembly name in the footer */
-.footer-brand {
-  color: GreenYellow;
-}
-
-/* Citizen Assembly logo in the footer */
-.footer-logo {
-  width: 100px;
-  height: 40px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 20px;
   display: inline-block;
-  background: url('/images/logo_bottom.png');
-  background-size: cover;
+  background-image: url('/images/meetup-thumb.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 50em) {
+  .meetup-heading {
+    margin-top: 5rem;
+  }
+}
+
+/* -------------------------------------------------- */
+/*  CUSTOMIZE PARTNERS                                */
+/* -------------------------------------------------- */
+
+.partners {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.partners-thumb {
+  width: 100%;
+  height: 250px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: inline-block;
+  background-image: url('/images/partners-thumb.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 50em) {
+  .meetup-heading {
+    margin-top: 5rem;
+  }
 }
 
 /* -------------------------------------------------- */
