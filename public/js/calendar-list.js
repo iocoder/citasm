@@ -30,18 +30,7 @@ function findCalendar(id) {
     return found || CalendarList[0];
 }
 
-function hexToRGBA(hex) {
-    var radix = 16;
-    var r = parseInt(hex.slice(1, 3), radix),
-        g = parseInt(hex.slice(3, 5), radix),
-        b = parseInt(hex.slice(5, 7), radix),
-        a = parseInt(hex.slice(7, 9), radix) / 255 || 1;
-    var rgba = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
-
-    return rgba;
-}
-
-(function() {
+function generateCalendars() {
     var calendar;
     var id = 0;
 
@@ -124,4 +113,4 @@ function hexToRGBA(hex) {
     calendar.dragBgColor = '#ff4040';
     calendar.borderColor = '#ff4040';
     addCalendar(calendar);
-})();
+}
