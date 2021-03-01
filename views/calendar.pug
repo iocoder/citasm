@@ -2,4 +2,48 @@ extends layout
 
 block content
 
-  h1.text-center Hello World Calendar
+  h2.text-center.calendar-title Citizen Assembly Calendar
+
+  div#menu.row(style="width: 100%;")
+
+    span#menu-navi.col-md.text-center
+
+      button#movePrev.btn.btn-default.btn-sm.move-day
+        i.calendar-icon.ic-arrow-line-left
+
+      button#moveToday.btn.btn-default.btn-sm.move-today
+        | This Week
+
+      button#moveNext.btn.btn-default.btn-sm.move-day
+        i.calendar-icon.ic-arrow-line-right
+
+    span#renderRange.render-range.col-md.text-center
+
+    span#menu-type.col-md.text-center
+
+      button#calendarTypeDaily.btn.btn-default.btn-sm.calendar-type
+        i#calendarTypeIcon.calendar-icon.ic_view_day
+        span#calendarTypeName Daily
+
+      button#calendarTypeWeekly.btn.btn-default.btn-sm.calendar-type
+        i#calendarTypeIcon.calendar-icon.ic_view_week
+        span#calendarTypeName Weekly
+
+      button#calendarTypeMonthly.btn.btn-default.btn-sm.calendar-type
+        i#calendarTypeIcon.calendar-icon.ic_view_month
+        span#calendarTypeName Monthly
+
+  div#calendar
+
+block scripts
+  script(src='/js/moment.min.js')
+  script(src='/js/chance.min.js')
+
+  script(src='/js/tui-code-snippet.min.js')
+  script(src='/js/tui-time-picker.min.js')
+  script(src='/js/tui-date-picker.min.js')
+  script(src='/js/tui-calendar.min.js')
+
+  script(src='/js/calendar-list.js')
+  script(src='/js/calendar-schedules.js')
+  script(src='/js/calendar-app.js')

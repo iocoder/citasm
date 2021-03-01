@@ -15,8 +15,13 @@ html
 
     // PAGE LINKS
     link(rel='shortcut icon', type='image/png', href='/images/favicon.png')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/tui-time-picker.min.css')
+    link(rel='stylesheet', href='/css/tui-date-picker.min.css')
+    link(rel='stylesheet', href='/css/tui-calendar.min.css')
+    link(rel='stylesheet', href='/css/calendar-icons.css')
+    link(rel='stylesheet', href='/css/calendar-style.css')
+    link(rel='stylesheet', href='/css/page-style.css')
 
   // *******************************************************************
   // *                          HTML BODY                              *
@@ -107,6 +112,8 @@ html
         div.footer-logo
 
     // =================================================================
-    // =                     BOOTSTRAP SCRIPT                          =
+    // =                        JAVASCRIPTS                            =
     // =================================================================
-    script(src='/javascripts/bootstrap.min.js')
+    script(src='/js/jquery.min.js')
+    script(src='/js/bootstrap.bundle.min.js')
+    block scripts
