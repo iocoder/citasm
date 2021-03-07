@@ -152,8 +152,26 @@
   padding-left: 16px;
 }
 
+#calendar {
+  height: 1290px;
+}
+
+.calendar-title {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  position: sticky;
+  top: 40px;
+  z-index: 1000;
+  background-color: white;
+}
+
 #menu {
   padding: 16px;
+  position: sticky;
+  top: 150px;
+  z-index: 1000;
+  background-color: white;
+  margin: 0;
 }
 
 .calendar-type {
@@ -203,22 +221,13 @@
 }
 
 .calendar-name {
-    font-size: 14px;
-    font-weight: bold;
-    vertical-align: middle;
+  font-size: 14px;
+  font-weight: bold;
+  vertical-align: middle;
 }
 
 .schedule-time {
-    color: #005aff;
-}
-
-#calendar {
-  height: 1300px;
-}
-
-.calendar-title {
-  padding-top: 3rem;
-  padding-bottom: 2rem;
+  color: #005aff;
 }
 
 .weekday-grid-more-schedules {
@@ -233,6 +242,13 @@
   font-size: 12px;
   text-align: center;
   color: #000;
+}
+
+.tui-full-calendar-dayname-layout {
+  position: sticky !important;
+  top: 210px;
+  background-color: lightyellow;
+  z-index: 1001;
 }
 
 .tui-full-calendar-dayname-container {

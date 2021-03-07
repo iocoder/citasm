@@ -53,7 +53,7 @@ app.use(function(err, req, res, next) {
   var event_model = app.get('event_model');
   var event_ctrl  = app.get('event_ctrl');
   var event_conn  = await csvdb(event_csv, event_model, '\t');
-  event_ctrl.connect(event_conn);
+  await event_ctrl.connect(event_conn);
 })();
 
 /* return app */

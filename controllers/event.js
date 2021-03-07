@@ -1,8 +1,12 @@
 
 class EventController {
 
-  connect(conn) {
+  async connect(conn) {
     this.conn = conn;
+  }
+
+  async get_events() {
+    return await this.conn.get();
   }
 
 }

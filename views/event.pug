@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  div(style="margin-left: 3rem; margin-right: 3rem;")
+    h2= "Event Information"
+
+    form.form-horizontal(action="/new_movie" method="POST")
+      div.form-group.row
+        label.col-sm-2.control-label(for='title') Event title:
+        div.col-sm-10
+          input.form-control(type="text" name="title" placeholder="")
+
+      div.form-group.row
+        label.col-sm-2.control-label(for='host') Host:
+        div.col-sm-10
+          input.form-control(type="text" name="host" placeholder="")
+      
+      div.form-group.row
+        label.col-sm-2.control-label(for='calendar') Type:
+        div.col-sm-10
+          input.form-control(type="text" name="calendar" placeholder="")
+
+      div.form-group.row
+        label.col-sm-2.control-label(for='date') Date:
+        div.col-sm-10
+          input.form-control(type="text" name="date" placeholder="")
+
+      div.form-group.row
+        label.col-sm-2.control-label(for='time') Time:
+        div.col-sm-10
+          input.form-control(type="text" name="time" placeholder="")
+
+      div.form-group.row
+        label.col-sm-2.control-label(for='duration') Duration:
+        div.col-sm-10
+          input.form-control(type="text" name="duration" placeholder="")
+      
+      div.form-group.row
+        label.col-sm-2.control-label(for='description') Description:
+        div.col-sm-10
+          input.form-control(type="text" name="description" placeholder="")
+      
+      div.form-group.row
+        button.btn.btn-primary(type="submit") Submit
+ 

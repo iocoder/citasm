@@ -1,16 +1,13 @@
 
 var EventModel = [
-  "ID", 
-  "Status", 
-  "Owner", 
-  "Calendar", 
-  "Title", 
-  "Start Time", 
-  "End Time", 
-  "Date", 
-  "Recurrence", 
+  "ID",
+  "Status",
+  "Host",
+  "Calendar",
+  "Title",
+  "Start",
+  "End",
   "Description",
 ];
 
 module.exports = EventModel;
- 

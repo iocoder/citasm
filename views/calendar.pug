@@ -34,6 +34,8 @@ block content
         span#calendarTypeName Monthly
 
   div#calendar
+  
+  input#events(type="hidden", value=JSON.stringify(events))
 
 block scripts
   script(src='/js/moment.min.js')
@@ -44,6 +46,4 @@ block scripts
   script(src='/js/tui-date-picker.min.js')
   script(src='/js/tui-calendar.min.js')
 
-  script(src='/js/calendar-list.js')
-  script(src='/js/calendar-schedules.js')
-  script(src='/js/calendar-app.js')
+  script(src='/js/gencal.js')
