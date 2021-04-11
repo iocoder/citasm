@@ -15,7 +15,7 @@ block content
     if (mode === "update")
       h2.text-center.event-heading
         div.event-icon.event-icon-update
-        span Update Event
+        span Edit Event
 
     if (mode === "clone")
       h2.text-center.event-heading
@@ -32,7 +32,23 @@ block content
         div.event-icon.event-icon-restore
         span Restore Event
 
-    form.form-horizontal(action=target method="GET")
+    if (msg === "created")
+      div.alert.alert-success
+        |Event was created successfully.
+
+    if (msg === "updated")
+      div.alert.alert-success
+        |Event was updated successfully.
+
+    if (msg === "enabled")
+      div.alert.alert-success
+        |Event was re-enabled successfully.
+
+    if (msg === "disabled")
+      div.alert.alert-success
+        |Event was deleted successfully.
+
+    form.form-horizontal(action="/calendar/req" method="GET")
 
       div.form-group.row
 
@@ -137,31 +153,48 @@ block content
       div.form-group.text-center
 
         if (mode === "new")
-          button.btn.btn-primary(type="submit" name="action" value="create") Create
+          button.btn.event-btn-green(type="submit" name="action" value="add") 
+            |Create event
+          button.btn.event-btn-grey(type="submit" name="action" value="calendar") 
+            |Cancel
 
-        if (mode === "view" && event["Status"] === "Active")
-          button.btn.btn-primary(type="submit" name="action" value="update") Update
+        if (mode === "view")
+          if (event["Status"] === "Active")
+            button.btn.event-btn-blue(type="submit" name="action" value="update") 
+              |Edit
+            button.btn.event-btn-blue(type="submit" name="action" value="clone") 
+              |Clone
+            button.btn.event-btn-red(type="submit" name="action" value="delete") 
+              |Delete
+          if (event["Status"] !== "Active")
+            button.btn.event-btn-red(type="submit" name="action" value="restore") 
+              |Restore
+          button.btn.event-btn-green(type="submit" name="action" value="calendar") 
+            |Return to Calendar
 
-        if (mode === "view" && event["Status"] === "Active")
-          button.btn.btn-primary(type="submit" name="action" value="clone") Clone
-
-        if (mode === "view" && event["Status"] === "Active")
-          button.btn.btn-primary(type="submit" name="action" value="delete") Delete
-
-        if (mode === "view" && event["Status"] !== "Active")
-          button.btn.btn-primary(type="submit" name="action" value="restore") Restore
- 
         if (mode === "update")
-          button.btn.btn-primary(type="submit" name="action" value="update") Update
+          button.btn.event-btn-green(type="submit" name="action" value="set") 
+            |Update event
+          button.btn.event-btn-grey(type="submit" name="action" value="view") 
+            |Cancel
  
         if (mode === "clone")
-          button.btn.btn-primary(type="submit" name="action" value="clone") Clone
+          button.btn.event-btn-green(type="submit" name="action" value="add") 
+            |Create event
+          button.btn.event-btn-grey(type="submit" name="action" value="view") 
+            |Cancel
  
         if (mode === "delete")
-          button.btn.btn-primary(type="submit" name="action" value="delete") Confirm Deletion
+          button.btn.event-btn-red(type="submit" name="action" value="disable") 
+            |Confirm Deletion
+          button.btn.event-btn-grey(type="submit" name="action" value="view") 
+            |Cancel
  
         if (mode === "restore")
-          button.btn.btn-primary(type="submit" name="action" value="restore") Confirm Restoration
+          button.btn.event-btn-red(type="submit" name="action" value="enable") 
+            |Confirm Restoration
+          button.btn.event-btn-grey(type="submit" name="action" value="view") 
+            |Cancel
 
   input#events(type="hidden", value=JSON.stringify(events))
 

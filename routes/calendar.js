@@ -41,7 +41,6 @@ router.get('/new', async function(req, res, next) {
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'new';
-    res.locals.target   = '/calendar/xnew';
     res.locals.locked   = false;
     res.locals.events   = events;
     res.locals.event    = event;
@@ -70,8 +69,8 @@ router.get('/view', async function(req, res, next) {
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'view';
-    res.locals.target   = '/calendar/xview';
     res.locals.locked   = true;
+    res.locals.msg      = req.query.msg;
     res.locals.events   = events;
     res.locals.event    = event;
 
@@ -99,7 +98,6 @@ router.get('/update', async function(req, res, next) {
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'update';
-    res.locals.target   = '/calendar/xupdate';
     res.locals.locked   = false;
     res.locals.events   = events;
     res.locals.event    = event;
@@ -123,12 +121,11 @@ router.get('/clone', async function(req, res, next) {
     events = await req.app.get('event_ctrl').all_events();
 
     /* get a clone of a specific event by ID */
-    event = await req.app.get('event_ctrl').clone_event(req.query.id);
+    event = await req.app.get('event_ctrl').get_event(req.query.id);
 
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'clone';
-    res.locals.target   = '/calendar/xclone';
     res.locals.locked   = false;
     res.locals.events   = events;
     res.locals.event    = event;
@@ -157,7 +154,6 @@ router.get('/delete', async function(req, res, next) {
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'delete';
-    res.locals.target   = '/calendar/xdelete';
     res.locals.locked   = true;
     res.locals.events   = events;
     res.locals.event    = event;
@@ -186,7 +182,6 @@ router.get('/restore', async function(req, res, next) {
     /* parameters to be passed to the HTML renderer */
     res.locals.calendar = 'active';
     res.locals.mode     = 'restore';
-    res.locals.target   = '/calendar/xrestore';
     res.locals.locked   = true;
     res.locals.events   = events;
     res.locals.event    = event;
@@ -199,114 +194,87 @@ router.get('/restore', async function(req, res, next) {
   }
 });
 
-/* Submit button clicked for event-add form */
-router.get('/xnew', async function(req, res, next) {
+/* Perform action */
+router.get('/req', async function(req, res, next) {
   try {
     /* variable to hold requested event */
     var event;
 
-    /* add new event to database */
-    event = await req.app.get('event_ctrl').add_event(req.query);
+    /* redirection URL*/
+    var nextURL;
 
-    /* redirect to another page */
-    res.redirect("/calendar/view?id=" + event["ID"]);
-  } catch (err) {
-    /* passes errors into the error handler */
-    return next(err);
-  }
-});
+    /* go to calendar */
+    if (req.query.action === 'calendar') {
+      nextURL = "/calendar";
+    }
 
-/* Submit button clicked for event-view form */
-router.get('/xview', async function(req, res, next) {
-  try {
-    /* variable to hold requested event */
-    var event;
+    /* go to new form */
+    if (req.query.action === 'new') {
+      nextURL = "/calendar/new";
+    }
 
-    /* get specific event by ID */
-    event = await req.app.get('event_ctrl').get_event(req.query.ID);
+    /* go to view form */
+    if (req.query.action === 'view') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      nextURL = "/calendar/view?id=" + event["ID"];
+    }
 
-    /* redirect to another page */
-    res.redirect("/calendar/" + req.query.action + "?id=" + event["ID"]);
-  } catch (err) {
-    /* passes errors into the error handler */
-    return next(err);
-  }
-});
+    /* go to update form */
+    if (req.query.action === 'update') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      nextURL = "/calendar/update?id=" + event["ID"];
+    }
 
-/* Submit button clicked for event-update form */
-router.get('/xupdate', async function(req, res, next) {
-  try {
-    /* variable to hold requested event */
-    var event;
+    /* go to clone form */
+    if (req.query.action === 'clone') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      nextURL = "/calendar/clone?id=" + event["ID"];
+    }
 
-    /* update existing event to database */
-    event = await req.app.get('event_ctrl').set_event(req.query.ID,req.query);
+    /* go to delete form */
+    if (req.query.action === 'delete') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      nextURL = "/calendar/delete?id=" + event["ID"];
+    }
 
-    /* redirect to another page */
-    res.redirect("/calendar/view?id=" + event["ID"]);
-  } catch (err) {
-    /* passes errors into the error handler */
-    return next(err);
-  }
-});
+    /* go to restore form */
+    if (req.query.action === 'restore') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      nextURL = "/calendar/restore?id=" + event["ID"];
+    }
 
-/* Submit button clicked for event-clone form */
-router.get('/xclone', async function(req, res, next) {
-  try {
-    /* variable to hold requested event */
-    var event;
+    /* command: add new event to database */
+    if (req.query.action === 'add') {
+      event = req.query;
+      event = await req.app.get('event_ctrl').add_event(event);
+      nextURL = "/calendar/view?id=" + event["ID"] + "&msg=created";
+    }
 
-    /* add new event to database */
-    event = await req.app.get('event_ctrl').add_event(req.query);
+    /* command: update event details */
+    if (req.query.action === 'set') {
+      event = req.query;
+      event = await req.app.get('event_ctrl').set_event(req.query.ID, event);
+      nextURL = "/calendar/view?id=" + event["ID"] + "&msg=updated";
+    }
 
-    /* redirect to another page */
-    res.redirect("/calendar/view?id=" + event["ID"]);
-  } catch (err) {
-    /* passes errors into the error handler */
-    return next(err);
-  }
-});
+    /* command: update event status to active */
+    if (req.query.action === 'enable') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      event["Status"] = "Active";
+      event = await req.app.get('event_ctrl').set_event(req.query.ID, event);
+      nextURL = "/calendar/view?id=" + event["ID"] + "&msg=enabled";
+    }
 
-/* Submit button clicked for event-delete form */
-router.get('/xdelete', async function(req, res, next) {
-  try {
-    /* variable to hold requested event */
-    var event;
+    /* command: update event status to deleted */
+    if (req.query.action === 'disable') {
+      event = await req.app.get('event_ctrl').get_event(req.query.ID);
+      event["Status"] = "Deleted";
+      event = await req.app.get('event_ctrl').set_event(req.query.ID, event);
+      nextURL = "/calendar/view?id=" + event["ID"] + "&msg=disabled";
+    }
 
-    /* get the required event by ID */
-    event = await req.app.get('event_ctrl').get_event(req.query.ID);
-
-    /* update event status */
-    event["Status"] = "Deleted";
-
-    /* update the required event */
-    event = await req.app.get('event_ctrl').set_event(req.query.ID,event);
-
-    /* redirect to another page */
-    res.redirect("/calendar/view?id=" + event["ID"]);
-  } catch (err) {
-    /* passes errors into the error handler */
-    return next(err);
-  }
-});
-
-/* Submit button clicked for event-restore form */
-router.get('/xrestore', async function(req, res, next) {
-  try {
-    /* variable to hold requested event */
-    var event;
-
-    /* get the required event by ID */
-    event = await req.app.get('event_ctrl').get_event(req.query.ID);
-
-    /* update event status */
-    event["Status"] = "Active";
-
-    /* update the required event */
-    event = await req.app.get('event_ctrl').set_event(req.query.ID,event);
-
-    /* redirect to another page */
-    res.redirect("/calendar/view?id=" + event["ID"]);
+    /* redirect to next URL */
+    res.redirect(nextURL);
   } catch (err) {
     /* passes errors into the error handler */
     return next(err);

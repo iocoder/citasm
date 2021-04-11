@@ -380,9 +380,36 @@ body {
   background-image: url("/images/event-restore.png");
 }
 
+/* read-only fields */
 .form-select[readonly], .form-control[readonly] {
-    background-color: #faf9ed;
-    opacity: 1;
+  background-color: #faf9ed;
+  opacity: 1;
+}
+
+/* button styles */
+.event-btn-red {
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #ffc8c4;
+}
+.event-btn-green {
+  margin-left: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #e2ffc4;
+}
+.event-btn-blue {
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #e3faff;
+}
+.event-btn-grey {
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #e8e8e8;
 }
 
 /* -------------------------------------------------- */

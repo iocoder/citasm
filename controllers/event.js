@@ -63,19 +63,6 @@ class EventController {
     return retEvent;
   }
 
-  async clone_event(id) {
-    var matchEvents;
-    var retEvent;
-
-    matchEvents = (await this.db.get({"ID": id}));
-
-    retEvent = matchEvents[0];
-
-    retEvent["ID"] = "Determined by server";
-
-    return retEvent;
-  }
-
 }
 
 module.exports = new EventController;

@@ -45,7 +45,8 @@ function generateCalendars() {
         calendar = calendarMap[event["Category"]];
       }
       calendarList.push(calendar);
-      event['Calendar'] = calendar;
+      calendarMap[event["Category"]] = calendar;
+      event["Calendar"] = calendar;
     }
   });
 }
@@ -127,6 +128,10 @@ function calendarInit() {
   });
 
   cal.createSchedules(scheduleList);
+
+  cal.on('clickSchedule', function(event) {
+    window.location.href = "/calendar/view?id=" + event.schedule.id;
+  });
 
   $('#movePrev').on('click', onClickMovePrev);
   $('#moveToday').on('click', onClickMoveToday);
