@@ -1,8 +1,5 @@
-ID	Status	Host	Calendar	Title	Start	End	Description
-1	Active	Ramses A.	CA General	Citizen Assembly – Stop Immigration	2021-03-11T01:00:00+00:00	2021-03-11T03:00:00+00:00	We are gonna discuss xyz. It’s all fun man
-2	Active	Cezary Jurewizc	CA General	Citizen Assembly – General Meeting	2021-03-07T16:00:00+00:00	2021-03-07T18:00:00+00:00	This is general meeting yaay
-3	Active	Staci	Thunderdome	Thunderdome Show	2021-03-10T01:00:00+00:00	2021-03-10T02:00:00+00:00	This is a meeting for hot debates – hot debato!
-4	Active	Staci	Crucible	The Crucible	2021-03-10T00:00:00+00:00	2021-03-10T01:00:00+00:00	This is a meeting for hot debates – hot debato!
-5	Active	Lois	CA Women	Citizen Assembly for Women	2021-03-07T16:00:00+00:00	2021-03-07T18:00:00+00:00	This is a meeting for hot debates – hot debato!
-6	Active	George	Constitution	Constitutional Convention	2021-03-09T01:00:00+00:00	2021-03-09T03:00:00+00:00	This is a meeting for hot debates – hot debato!
-7	Active	Cezary Jurewizc	Leadership	Leadership Academy	2021-03-12T01:00:00+00:00	2021-03-12T03:00:00+00:00	This is a meeting for hot debates – hot debato!
+ID	Status	Title	Category	Host	Start	End	Zone	Location	Description
+0	Active								
+1	Active	Citizen Assembly – Is Biden a hypocrite?	CA General	Ramsès	2021-04-14 20:00	2021-04-14 22:00	America/Toronto	On Zoom	We are gonna discuss xyz. It’s all fun man
+2	Active	Citizen Assembly – General Meeting	CA General	Cezary Jurewizc	2021-04-11 10:00	2021-04-11 12:00	America/Chicago	Online	Hey man
+3	Active	Thunderdome Show	Thunderdome	Staci	2021-04-13 19:00	2021-04-13 21:00	America/Chicago	ROFLMAO	This is a meeting for hot debates – hot debato!

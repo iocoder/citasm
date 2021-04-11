@@ -30,22 +30,21 @@ function generateCalendars() {
   var currentId = 0;
   eventList.forEach(function(event) {
     if (event['Status'] === 'Active') {
-      if (calendarMap[event["Calendar"]] == null) {
+      if (calendarMap[event["Category"]] == null) {
         var color = colors[currentId % 7].fgColor;
         var bgColor = colors[currentId % 7].bgColor;
         var calendarId = String(++currentId);
         var calendar = {
           id: calendarId,
-          name: event["Calendar"],
+          name: event["Category"],
           color: color,
           bgColor: bgColor,
           borderColor: '#8080e0'
         };
       } else {
-        calendar = calendarMap[event["Calendar"]];
+        calendar = calendarMap[event["Category"]];
       }
       calendarList.push(calendar);
-      calendarMap[event["Calendar"]] = calendar;
       event['Calendar'] = calendar;
     }
   });
@@ -60,8 +59,8 @@ function generateSchedules() {
         category: 'time',
         title: event["Title"],
         body: event["Description"],
-        start: new Date(event["Start"]),
-        end: new Date(event["End"]),
+        start: moment.tz(event["Start"], event["Zone"]).format(),
+        end: moment.tz(event["End"], event["Zone"]).format(),
         dueDateClass: '',
         location: "Some location",
         state: "Free"
@@ -73,35 +72,29 @@ function generateSchedules() {
 
 function onClickMovePrev(e) {
   cal.prev();
-  updateRangeText();
 }
 
 function onClickMoveToday(e) {
   cal.today();
-  updateRangeText();
 }
 
 function onClickMoveNext(e) {
   cal.next();
-  updateRangeText();
 }
 
 function onClickTypeDaily(e) {
   cal.changeView('day', true);
   updateCalendarType();
-  updateRangeText();
 }
 
 function onClickTypeWeekly(e) {
   cal.changeView('week', true);
   updateCalendarType();
-  updateRangeText();
 }
 
 function onClickTypeMonthly(e) {
   cal.changeView('month', true);
   updateCalendarType();
-  updateRangeText();
 }
 
 function onWinResize() {
@@ -118,34 +111,10 @@ function updateCalendarType() {
   }
 }
 
-function updateRangeText() {
-    var renderRange = document.getElementById('renderRange');
-    var options = cal.getOptions();
-    var viewName = cal.getViewName();
-    var currentDate = moment([cal.getDate().getFullYear(),
-                              cal.getDate().getMonth(),
-                              cal.getDate().getDate()]);
-
-    var html = [];
-    if (viewName === 'day') {
-        html.push(currentDate.format('DD/MM/YYYY'));
-    } else if (viewName === 'month' &&
-        (!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {
-        html.push(currentDate.format('MM/YYYY'));
-    } else {
-        html.push(moment(cal.getDateRangeStart().getTime()).format('DD/MM/YYYY'));
-        html.push(' to ');
-        html.push(moment(cal.getDateRangeEnd().getTime()).format('DD/MM/YYYY'));
-    }
-    renderRange.innerHTML = html.join('');
-}
-
 function calendarInit() {
   generateEvents();
   generateCalendars();
   generateSchedules();
-  console.log(calendarList);
-  console.log(scheduleList);
 
   cal = new tui.Calendar('#calendar', {
       defaultView: 'week',
@@ -171,7 +140,6 @@ function calendarInit() {
   window.cal = cal;
 
   updateCalendarType();
-  updateRangeText();
 }
 
 calendarInit();

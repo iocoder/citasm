@@ -6,6 +6,12 @@ block content
 
   div#menu.row(style="width: 100%;")
 
+    span#menu-actions.col-md.text-center
+
+      a(href="/calendar/new")
+        button#createEvent.btn.btn-default.btn-sm.create-event
+          | Create Event
+
     span#menu-navi.col-md.text-center
 
       button#movePrev.btn.btn-default.btn-sm.move-day
@@ -16,8 +22,6 @@ block content
 
       button#moveNext.btn.btn-default.btn-sm.move-day
         i.calendar-icon.ic-arrow-line-right
-
-    span#renderRange.render-range.col-md.text-center
 
     span#menu-type.col-md.text-center
 
@@ -39,11 +43,9 @@ block content
 
 block scripts
   script(src='/js/moment.min.js')
-  script(src='/js/chance.min.js')
+  script(src='/js/moment-timezone.min.js')
 
   script(src='/js/tui-code-snippet.min.js')
-  script(src='/js/tui-time-picker.min.js')
-  script(src='/js/tui-date-picker.min.js')
   script(src='/js/tui-calendar.min.js')
 
-  script(src='/js/gencal.js')
+  script(src='/js/app-calendar.js')

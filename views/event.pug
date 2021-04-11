@@ -2,44 +2,172 @@ extends layout
 
 block content
   div(style="margin-left: 3rem; margin-right: 3rem;")
-    h2= "Event Information"
+    if (mode === "new")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-new
+        span Create New Event
 
-    form.form-horizontal(action="/new_movie" method="POST")
-      div.form-group.row
-        label.col-sm-2.control-label(for='title') Event title:
-        div.col-sm-10
-          input.form-control(type="text" name="title" placeholder="")
+    if (mode === "view")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-view
+        span View Event
+
+    if (mode === "update")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-update
+        span Update Event
+
+    if (mode === "clone")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-clone
+        span Clone Event
+
+    if (mode === "delete")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-delete
+        span Delete Event
+
+    if (mode === "restore")
+      h2.text-center.event-heading
+        div.event-icon.event-icon-restore
+        span Restore Event
+
+    form.form-horizontal(action=target method="GET")
 
       div.form-group.row
-        label.col-sm-2.control-label(for='host') Host:
-        div.col-sm-10
-          input.form-control(type="text" name="host" placeholder="")
+
+        label.col-sm-1.control-label(for='ID') ID:
+        div.col-sm-5
+          input.form-control(type="text" 
+                             name="ID" 
+                             placeholder="" 
+                             readonly=true
+                             value=event["ID"])
+
+        label.col-sm-1.control-label(for='Status') Status:
+        div.col-sm-5
+          input.form-control(type="text" 
+                             name="Status" 
+                             placeholder="" 
+                             readonly=true
+                             value=event["Status"])
+
+      div.form-group.row
+
+        label.col-sm-1.control-label(for='Title') Title:
+        div.col-sm-11
+          input.form-control(type="text" 
+                             name="Title" 
+                             placeholder="" 
+                             readonly=locked
+                             value=event["Title"])
+
+      div.form-group.row
+
+        label.col-sm-1.control-label(for='Category') Category:
+        div.col-sm-5.event-dropdown-container
+          input.form-select(name="Category" 
+                            placeholder="" 
+                            readonly=locked
+                            value=event["Category"]
+                            list="categoryList")
+          datalist#categoryList
+
+        label.col-sm-1.control-label(for='Host') Host:
+        div.col-sm-5
+          input.form-select(name="Host" 
+                            placeholder="" 
+                            readonly=locked
+                            value=event["Host"]
+                            list="hostList")
+          datalist#hostList
+
+
+      div.form-group.row
+
+        label.col-sm-1.control-label(for='Start') Start:
+        div.col-sm-3
+          div.tui-datepicker-input
+            input#start.form-control(type="text" 
+                                     name="Start" 
+                                     placeholder="" 
+                                     readonly=locked
+                                     value=event["Start"])
+            div#startWrap(style="margin-top: -1px;")
+            span.tui-ico-date
+
+        label.col-sm-1.control-label(for='End') End:
+        div.col-sm-3
+          div.tui-datepicker-input
+            input#end.form-control(type="text" 
+                                   name="End" 
+                                   placeholder="" 
+                                   readonly=locked
+                                   value=event["End"])
+            div#endWrap(style="margin-top: -1px;")
+            span.tui-ico-date
       
-      div.form-group.row
-        label.col-sm-2.control-label(for='calendar') Type:
-        div.col-sm-10
-          input.form-control(type="text" name="calendar" placeholder="")
+        label.col-sm-1.control-label(for='Zone') Zone:
+        div.col-sm-3
+          div.tui-datepicker-input
+            select#zone.form-select(name="Zone" 
+                                    placeholder="" 
+                                    readonly=locked) 
+              option(value=event["Zone"] selected="1") #{event["Zone"]}
 
       div.form-group.row
-        label.col-sm-2.control-label(for='date') Date:
-        div.col-sm-10
-          input.form-control(type="text" name="date" placeholder="")
 
+        label.col-sm-1.control-label(for='Location') Location:
+        div.col-sm-11
+          input.form-control(type="text" 
+                             name="Location" 
+                             placeholder="" 
+                             readonly=locked
+                             value=event["Location"])
+       
       div.form-group.row
-        label.col-sm-2.control-label(for='time') Time:
-        div.col-sm-10
-          input.form-control(type="text" name="time" placeholder="")
 
-      div.form-group.row
-        label.col-sm-2.control-label(for='duration') Duration:
-        div.col-sm-10
-          input.form-control(type="text" name="duration" placeholder="")
+        label.col-sm-1.control-label(for='Description') Details:
+        div.col-sm-11
+          textarea.form-control(name="Description" 
+                                placeholder="" 
+                                readonly=locked
+                                style="height: 400px") #{event["Description"]}
       
-      div.form-group.row
-        label.col-sm-2.control-label(for='description') Description:
-        div.col-sm-10
-          input.form-control(type="text" name="description" placeholder="")
-      
-      div.form-group.row
-        button.btn.btn-primary(type="submit") Submit
+      div.form-group.text-center
+
+        if (mode === "new")
+          button.btn.btn-primary(type="submit" name="action" value="create") Create
+
+        if (mode === "view" && event["Status"] === "Active")
+          button.btn.btn-primary(type="submit" name="action" value="update") Update
+
+        if (mode === "view" && event["Status"] === "Active")
+          button.btn.btn-primary(type="submit" name="action" value="clone") Clone
+
+        if (mode === "view" && event["Status"] === "Active")
+          button.btn.btn-primary(type="submit" name="action" value="delete") Delete
+
+        if (mode === "view" && event["Status"] !== "Active")
+          button.btn.btn-primary(type="submit" name="action" value="restore") Restore
  
+        if (mode === "update")
+          button.btn.btn-primary(type="submit" name="action" value="update") Update
+ 
+        if (mode === "clone")
+          button.btn.btn-primary(type="submit" name="action" value="clone") Clone
+ 
+        if (mode === "delete")
+          button.btn.btn-primary(type="submit" name="action" value="delete") Confirm Deletion
+ 
+        if (mode === "restore")
+          button.btn.btn-primary(type="submit" name="action" value="restore") Confirm Restoration
+
+  input#events(type="hidden", value=JSON.stringify(events))
+
+block scripts
+  script(src='/js/moment.min.js')
+  script(src='/js/moment-timezone.min.js')
+  script(src='/js/tui-time-picker.min.js')
+  script(src='/js/tui-date-picker.min.js')
+  script(src='/js/app-event.js')

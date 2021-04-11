@@ -341,9 +341,48 @@ body {
 }
 
 .control-label {
-  text-align: right;
   font-weight: bold;
   padding-top: 4px;
+}
+
+/* event form title */
+.event-heading {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* event form: title icons */
+.event-icon {
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  vertical-align: middle;
+}
+.event-icon-new {
+  background-image: url("/images/event-new.png");
+}
+.event-icon-view {
+  background-image: url("/images/event-view.png");
+}
+.event-icon-update {
+  background-image: url("/images/event-update.png");
+}
+.event-icon-clone {
+  background-image: url("/images/event-clone.png");
+}
+.event-icon-delete {
+  background-image: url("/images/event-delete.png");
+}
+.event-icon-restore {
+  background-image: url("/images/event-restore.png");
+}
+
+.form-select[readonly], .form-control[readonly] {
+    background-color: #faf9ed;
+    opacity: 1;
 }
 
 /* -------------------------------------------------- */

@@ -2,11 +2,13 @@
 var EventModel = [
   "ID",
   "Status",
-  "Host",
-  "Calendar",
   "Title",
+  "Category",
+  "Host",
   "Start",
   "End",
+  "Zone",
+  "Location",
   "Description",
 ];
 

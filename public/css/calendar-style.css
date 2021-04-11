@@ -152,19 +152,6 @@
   padding-left: 16px;
 }
 
-#calendar {
-  height: 1290px;
-}
-
-.calendar-title {
-  padding-top: 3rem;
-  padding-bottom: 2rem;
-  position: sticky;
-  top: 40px;
-  z-index: 1000;
-  background-color: white;
-}
-
 #menu {
   padding: 16px;
   position: sticky;
@@ -172,10 +159,6 @@
   z-index: 1000;
   background-color: white;
   margin: 0;
-}
-
-.calendar-type {
-  padding: 0 8px 0 11px;
 }
 
 #calendarTypeName {
@@ -191,24 +174,52 @@
   margin-right: 4px;
 }
 
-.move-today {
-  padding: 0 16px;
-  line-height: 30px;
-}
-
-.move-day {
-  padding: 8px;
-  font-size: 0;
-}
-
 #renderRange {
   padding-left: 12px;
   font-size: 19px;
   vertical-align: middle;
 }
 
+.calendar-type {
+  padding: 0 8px 0 11px;
+  background-color: #C0E0FF
+}
+
+.move-today {
+  padding: 0 16px;
+  line-height: 30px;
+  background-color: #E0E000;
+}
+
+.move-day {
+  padding: 8px;
+  font-size: 0;
+  background-color: #E0E000;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.create-event {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #A0E0A0;
+}
+
 .dropdown-menu-title .calendar-icon {
   margin-right: 8px;
+}
+
+#calendar {
+  height: 1290px;
+}
+
+.calendar-title {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  position: sticky;
+  top: 40px;
+  z-index: 1000;
+  background-color: white;
 }
 
 .calendar-bar {
@@ -257,4 +268,25 @@
 
 .tui-full-calendar-timegrid-container {
   overflow-y: hidden !important;
+}
+
+.tui-datepicker-input > input {
+  font-size: inherit !important;
+}
+
+.tui-datepicker-input>select {
+  width: 100%;
+  height: 100%;
+  padding: 6px 27px 6px 10px;
+  line-height: 14px;
+  vertical-align: top;
+  border: 0;
+  color: #333;
+}
+
+.tui-datepicker-input {
+  height: inherit !important;
+  width: 100% !important;
+  height: 99% !important;
+  border-radius: .25rem;
 }
