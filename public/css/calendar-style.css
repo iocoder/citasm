@@ -295,6 +295,10 @@
   width: 100%;
 }
 
+.tui-full-calendar-vlayout-area {
+  margin-top: 40px;
+}
+
 .tui-full-calendar-dayname-container {
   overflow-y: hidden !important;
 }
