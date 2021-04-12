@@ -110,16 +110,40 @@ function onClickTypeMonthly(e) {
 
 function onWinResize() {
   cal.render();
+  updateCalendarOffsets();
+  updateCalendarLabels();
 }
 
 function updateCalendarOffsets() {
+  var navBar = $('.navbar');
+
   var calendarTitle = $('#calendarTitle');
   var calendarMenu = $('#calendarMenu');
   var calendarNavigator = $('#calendarNavigator');
 
-  calendarTitle.css('top', calendarTitle.offset().top);
-  calendarMenu.css('top', calendarMenu.offset().top);
-  calendarNavigator.css('top', calendarNavigator.offset().top);
+  var titleText;
+  if (window.innerWidth < 450) {
+    titleText = "CA Calendar";
+  } else {
+    titleText = "Citizen Assembly Calendar";
+  }
+  $('#calendarTitle').children('span')[0].innerHTML = titleText;
+
+  if (window.innerWidth < 600) {
+    calendarTitle.css('padding-top', '1rem');
+    calendarTitle.css('padding-bottom', '0rem');
+  } else {
+    calendarTitle.css('padding-top', '3rem');
+    calendarTitle.css('padding-bottom', '2rem');
+  }
+
+  var navHeight = navBar.outerHeight();
+  var titleHeight = calendarTitle.outerHeight();
+  var menuHeight = calendarMenu.outerHeight();
+
+  calendarTitle.css('top', navHeight);
+  calendarMenu.css('top', navHeight + titleHeight);
+  calendarNavigator.css('top', navHeight + titleHeight + menuHeight);
 }
 
 function updateCalendarLabels() {
@@ -135,21 +159,24 @@ function updateCalendarLabels() {
   var rangeStartText = moment(rangeStart).format("MMMM, YYYY");
   var rangeEndText   = moment(rangeEnd).format("MMMM, YYYY");
 
+  var prevWord = window.innerWidth < 400 ? '' : 'Prev ';
+  var nextWord = window.innerWidth < 400 ? '' : 'Next ';
+
   if (cal.getViewName() === 'day') {
-    prevLabel.innerHTML  = 'Prev Day';
-    nextLabel.innerHTML  = 'Next Day';
+    prevLabel.innerHTML  = prevWord + 'Day';
+    nextLabel.innerHTML  = nextWord + 'Day';
     monthLabel.innerHTML = curDayText;
   } else if (cal.getViewName() === 'week') {
-    prevLabel.innerHTML = 'Prev Week';
-    nextLabel.innerHTML = 'Next Week';
+    prevLabel.innerHTML  = prevWord + 'Week';
+    nextLabel.innerHTML  = nextWord + 'Week';
     if (rangeStartText === rangeEndText) {
       monthLabel.innerHTML = rangeStartText;
     } else {
       monthLabel.innerHTML = rangeStartText + " - " + rangeEndText;
     }
   } else if (cal.getViewName() === 'month') {
-    prevLabel.innerHTML = 'Prev Month';
-    nextLabel.innerHTML = 'Next Month';
+    prevLabel.innerHTML  = prevWord + 'Month';
+    nextLabel.innerHTML  = nextWord + 'Month';
     monthLabel.innerHTML = curDayText;
   }
 
