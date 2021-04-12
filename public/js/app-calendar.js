@@ -29,7 +29,7 @@ function generateCalendars() {
   var calendarMap = {};
   var currentId = 0;
   eventList.forEach(function(event) {
-    if (event['Status'] === 'Active') {
+    if (event['ID'] !== '0' && event['Status'] === 'Active') {
       if (calendarMap[event["Category"]] == null) {
         var color = colors[currentId % 7].fgColor;
         var bgColor = colors[currentId % 7].bgColor;
@@ -53,7 +53,7 @@ function generateCalendars() {
 
 function generateSchedules() {
   eventList.forEach(function(event) {
-    if (event['Status'] === 'Active') {
+    if (event['ID'] !== '0' && event['Status'] === 'Active') {
       var schedule = {
         id: event["ID"],
         calendarId: event["Calendar"].id,
@@ -71,80 +71,143 @@ function generateSchedules() {
   });
 }
 
-function onClickMovePrev(e) {
-  cal.prev();
+function onClickSchedule(event) {
+  window.location.href = "/calendar/view?id=" + event.schedule.id;
 }
 
-function onClickMoveToday(e) {
-  cal.today();
+function onClickCreateEvent(event) {
+  window.location.href = "/calendar/new";
+}
+
+function onClickDownloadCSV(event) {
+  window.location.href = "/csv/events.csv";
+}
+
+function onClickMovePrev(e) {
+  cal.prev();
+  updateCalendarLabels();
 }
 
 function onClickMoveNext(e) {
   cal.next();
+  updateCalendarLabels();
 }
 
 function onClickTypeDaily(e) {
   cal.changeView('day', true);
-  updateCalendarType();
+  updateCalendarLabels();
 }
 
 function onClickTypeWeekly(e) {
   cal.changeView('week', true);
-  updateCalendarType();
+  updateCalendarLabels();
 }
 
 function onClickTypeMonthly(e) {
   cal.changeView('month', true);
-  updateCalendarType();
+  updateCalendarLabels();
 }
 
 function onWinResize() {
   cal.render();
 }
 
-function updateCalendarType() {
+function updateCalendarOffsets() {
+  var calendarTitle = $('#calendarTitle');
+  var calendarMenu = $('#calendarMenu');
+  var calendarNavigator = $('#calendarNavigator');
+
+  calendarTitle.css('top', calendarTitle.offset().top);
+  calendarMenu.css('top', calendarMenu.offset().top);
+  calendarNavigator.css('top', calendarNavigator.offset().top);
+}
+
+function updateCalendarLabels() {
+  var prevLabel  = document.getElementById('prevLabel');
+  var nextLabel  = document.getElementById('nextLabel');
+  var monthLabel = document.getElementById('monthLabel');
+
+  var curDay     = cal.getDate().getTime();
+  var rangeStart = cal.getDateRangeStart().getTime();
+  var rangeEnd   = cal.getDateRangeEnd().getTime();
+
+  var curDayText     = moment(curDay).format("MMMM, YYYY");
+  var rangeStartText = moment(rangeStart).format("MMMM, YYYY");
+  var rangeEndText   = moment(rangeEnd).format("MMMM, YYYY");
+
   if (cal.getViewName() === 'day') {
-    document.getElementById('moveToday').innerHTML = 'Today';
+    prevLabel.innerHTML  = 'Prev Day';
+    nextLabel.innerHTML  = 'Next Day';
+    monthLabel.innerHTML = curDayText;
   } else if (cal.getViewName() === 'week') {
-    document.getElementById('moveToday').innerHTML = 'This Week';
+    prevLabel.innerHTML = 'Prev Week';
+    nextLabel.innerHTML = 'Next Week';
+    if (rangeStartText === rangeEndText) {
+      monthLabel.innerHTML = rangeStartText;
+    } else {
+      monthLabel.innerHTML = rangeStartText + " - " + rangeEndText;
+    }
   } else if (cal.getViewName() === 'month') {
-    document.getElementById('moveToday').innerHTML = 'This Month';
+    prevLabel.innerHTML = 'Prev Month';
+    nextLabel.innerHTML = 'Next Month';
+    monthLabel.innerHTML = curDayText;
   }
+
+}
+
+function filterSchedules(schedule) {
+  var scheduleTime = schedule.start.getTime();
+  var calendarTime = cal.getDate().getTime();
+
+  var scheduleMonth = moment(scheduleTime).format("MMMM");
+  var calendarMonth = moment(calendarTime).format("MMMM");
+
+  return scheduleMonth === calendarMonth;
 }
 
 function calendarInit() {
+  var defaultView;
+
   generateEvents();
   generateCalendars();
   generateSchedules();
 
+  if (window.innerWidth < 700) {
+    defaultView = 'day';
+  } else {
+    defaultView = 'week';
+  }
+
   cal = new tui.Calendar('#calendar', {
-      defaultView: 'week',
+      defaultView: defaultView,
       useCreationPopup: false,
       useDetailPopup: false,
       calendars: calendarList,
       taskView: [],
       scheduleView: ['time'],
-      isReadOnly: true
+      isReadOnly: true,
+      month: {scheduleFilter: filterSchedules},
   });
 
   cal.createSchedules(scheduleList);
 
-  cal.on('clickSchedule', function(event) {
-    window.location.href = "/calendar/view?id=" + event.schedule.id;
-  });
+  cal.on('clickSchedule', onClickSchedule);
 
-  $('#movePrev').on('click', onClickMovePrev);
-  $('#moveToday').on('click', onClickMoveToday);
-  $('#moveNext').on('click', onClickMoveNext);
+  $('#createEvent').on('click', onClickCreateEvent);
+  $('#downloadCSV').on('click', onClickDownloadCSV);
 
   $('#calendarTypeDaily').on('click', onClickTypeDaily);
   $('#calendarTypeWeekly').on('click', onClickTypeWeekly);
   $('#calendarTypeMonthly').on('click', onClickTypeMonthly);
 
+  $('#movePrev').on('click', onClickMovePrev);
+  $('#moveNext').on('click', onClickMoveNext);
+
   window.addEventListener('resize', tui.util.throttle(onWinResize,50));
   window.cal = cal;
 
-  updateCalendarType();
+  updateCalendarOffsets();
+  updateCalendarLabels();
 }
 
 calendarInit();

@@ -5,7 +5,6 @@
 
 .btn:hover {
   border: solid 1px #bbb;
-  background-color: #fff;
 }
 
 .btn:active {
@@ -45,15 +44,18 @@
   color: #333;
 }
 
-.bi15 {
-  width: 15px;
-  height: 15px;
+.dropdown-menu-title .calendar-icon {
+  margin-right: 8px;
 }
-/** custom fontawesome - end */
 
 .calendar-icon {
   width: 14px;
   height: 14px;
+}
+
+.bi15 {
+  width: 15px;
+  height: 15px;
 }
 
 #top {
@@ -152,16 +154,48 @@
   padding-left: 16px;
 }
 
-#menu {
+#calendarTitle {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  position: sticky;
+  z-index: 1000;
+  background-color: white;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.calendar-title-icon {
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  vertical-align: middle;
+  background-image: url("/images/calendar.png");
+}
+
+#calendarMenu {
   padding: 16px;
   position: sticky;
-  top: 150px;
   z-index: 1000;
   background-color: white;
   margin: 0;
+  width: 100%;
 }
 
-#calendarTypeName {
+.calendar-action {
+  background-color: #e7f5c9;
+  min-width: 180px;
+  padding: 0 8px 0 11px;
+}
+
+.calendar-type {
+  padding: 0 8px 0 11px;
+  background-color: #def9ff;
+}
+
+.calendar-type-name {
   min-width: 62px;
   display: inline-block;
   text-align: left;
@@ -170,56 +204,36 @@
   padding-right: 2px;
 }
 
-#calendarTypeIcon {
+.calendar-type-icon {
   margin-right: 4px;
 }
 
-#renderRange {
-  padding-left: 12px;
-  font-size: 19px;
-  vertical-align: middle;
-}
-
-.calendar-type {
-  padding: 0 8px 0 11px;
-  background-color: #C0E0FF
-}
-
-.move-today {
-  padding: 0 16px;
-  line-height: 30px;
-  background-color: #E0E000;
+#calendarNavigator {
+  padding: 16px;
+  position: sticky;
+  z-index: 1000;
+  background-color: #ecf0e6;
+  margin: 0;
+  width: 100%;
+  border-top: 1px solid rgb(229, 229, 229);
 }
 
 .move-day {
-  padding: 8px;
-  font-size: 0;
-  background-color: #E0E000;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.create-event {
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #A0E0A0;
+  background-color: lightyellow;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 140px;
 }
 
-.dropdown-menu-title .calendar-icon {
-  margin-right: 8px;
+.cur-month {
+  padding-top: 5px;
+  font-weight: bold;
 }
 
 #calendar {
   height: 1290px;
-}
-
-.calendar-title {
-  padding-top: 3rem;
-  padding-bottom: 2rem;
-  position: sticky;
-  top: 40px;
-  z-index: 1000;
-  background-color: white;
 }
 
 .calendar-bar {
@@ -256,10 +270,17 @@
 }
 
 .tui-full-calendar-dayname-layout {
-  position: sticky !important;
-  top: 210px;
-  background-color: lightyellow;
-  z-index: 1001;
+  position: fixed !important;
+  background-color: lightyellow !important;
+  z-index: 1000;
+  width: 100%;
+}
+
+.tui-full-calendar-month-dayname {
+  position: fixed !important;
+  background-color: lightyellow !important;
+  z-index: 1000;
+  width: 100%;
 }
 
 .tui-full-calendar-dayname-container {

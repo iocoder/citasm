@@ -2,40 +2,49 @@ extends layout
 
 block content
 
-  h2.text-center.calendar-title Citizen Assembly Calendar
+  h2#calendarTitle.text-center 
+    div.calendar-title-icon
+    span Citizen Assembly Calendar
 
-  div#menu.row(style="width: 100%;")
+  div#calendarMenu.row.text-center
+  
+    span.col-6.text-center
+    
+      button#createEvent.btn.btn-default.calendar-action
+        i.calendar-icon.calendar-type-icon.ic_create_event
+        span.calendar-type-name Create Event
+      button#downloadCSV.btn.btn-default.calendar-action
+        i.calendar-icon.calendar-type-icon.ic_download_sheet
+        span.calendar-type-name Download CSV
+        
+    span.col-6.text-center
 
-    span#menu-actions.col-md.text-center
+      button#calendarTypeDaily.btn.btn-default.calendar-type
+        i.calendar-icon.calendar-type-icon.ic_view_day
+        span.calendar-type-name Daily
 
-      a(href="/calendar/new")
-        button#createEvent.btn.btn-default.btn-sm.create-event
-          | Create Event
+      button#calendarTypeWeekly.btn.btn-default.calendar-type
+        i.calendar-icon.calendar-type-icon.ic_view_week
+        span.calendar-type-name Weekly
 
-    span#menu-navi.col-md.text-center
+      button#calendarTypeMonthly.btn.btn-default.calendar-type
+        i.calendar-icon.calendar-type-icon.ic_view_month
+        span.calendar-type-name Monthly
 
+  div#calendarNavigator.row
+
+    div.col-sm.text-center
       button#movePrev.btn.btn-default.btn-sm.move-day
         i.calendar-icon.ic-arrow-line-left
+        span#prevLabel Prev Day
 
-      button#moveToday.btn.btn-default.btn-sm.move-today
-        | This Week
+    div.col-sm.text-center.cur-month
+      span#monthLabel Month, Year
 
+    div.col-sm.text-center
       button#moveNext.btn.btn-default.btn-sm.move-day
+        span#nextLabel Next Day
         i.calendar-icon.ic-arrow-line-right
-
-    span#menu-type.col-md.text-center
-
-      button#calendarTypeDaily.btn.btn-default.btn-sm.calendar-type
-        i#calendarTypeIcon.calendar-icon.ic_view_day
-        span#calendarTypeName Daily
-
-      button#calendarTypeWeekly.btn.btn-default.btn-sm.calendar-type
-        i#calendarTypeIcon.calendar-icon.ic_view_week
-        span#calendarTypeName Weekly
-
-      button#calendarTypeMonthly.btn.btn-default.btn-sm.calendar-type
-        i#calendarTypeIcon.calendar-icon.ic_view_month
-        span#calendarTypeName Monthly
 
   div#calendar
   
