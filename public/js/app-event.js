@@ -22,9 +22,20 @@ var endDatePicker = new tui.DatePicker('#endWrap', {
 
 var eventList = JSON.parse($("#events").val());
 
+var titleList = document.getElementById('titleList');
+var titleMap  = {}
+eventList.forEach(function(event) {
+  if (event["Title"] !== "" && titleMap[event["Title"]] == null) {
+    var opt = document.createElement('option');
+    opt.value     = event["Title"];
+    opt.innerHTML = event["Title"];
+    titleList.appendChild(opt);
+    titleMap[event["Title"]] = true;
+  }
+});
+
 var categoryList = document.getElementById('categoryList');
 var categoryMap  = {}
-
 eventList.forEach(function(event) {
   if (event["Category"] !== "" && categoryMap[event["Category"]] == null) {
     var opt = document.createElement('option');
@@ -37,7 +48,6 @@ eventList.forEach(function(event) {
 
 var hostList = document.getElementById('hostList');
 var hostMap  = {}
-
 eventList.forEach(function(event) {
   if (event["Host"] !== "" && hostMap[event["Host"]] == null) {
     var opt = document.createElement('option');
@@ -48,19 +58,29 @@ eventList.forEach(function(event) {
   }
 });
 
-zoneList = document.getElementById('zone');
-zoneDefault = zoneList.options[0];
-
+var zoneList = document.getElementById('zone');
+var zoneDefault = zoneList.options[0];
 if (zoneDefault.innerHTML === "") {
   var opt = document.createElement('option');
   opt.value     = moment.tz.guess();
   opt.innerHTML = moment.tz.guess();
   zoneList.appendChild(opt);
 }
-
 moment.tz.names().forEach(function(tzname) {
   var opt = document.createElement('option');
   opt.value     = tzname;
   opt.innerHTML = tzname;
   zoneList.appendChild(opt);
+});
+
+var locationList = document.getElementById('locationList');
+var locationMap  = {}
+eventList.forEach(function(event) {
+  if (event["Location"] !== "" && locationMap[event["Location"]] == null) {
+    var opt = document.createElement('option');
+    opt.value     = event["Location"];
+    opt.innerHTML = event["Location"];
+    locationList.appendChild(opt);
+    locationMap[event["Location"]] = true;
+  }
 });

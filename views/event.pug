@@ -56,7 +56,7 @@ block content
         div.col-sm-5
           input.form-control(type="text" 
                              name="ID" 
-                             placeholder="" 
+                             placeholder="Determined by server." 
                              readonly=true
                              value=event["ID"])
 
@@ -64,7 +64,7 @@ block content
         div.col-sm-5
           input.form-control(type="text" 
                              name="Status" 
-                             placeholder="" 
+                             placeholder="Whether meeting is active/deleted." 
                              readonly=true
                              value=event["Status"])
 
@@ -72,32 +72,33 @@ block content
 
         label.col-sm-1.control-label(for='Title') Title:
         div.col-sm-11
+          datalist#titleList
           input.form-control(type="text" 
                              name="Title" 
-                             placeholder="" 
+                             placeholder="Choose an attractive title." 
                              readonly=locked
-                             value=event["Title"])
+                             value=event["Title"]
+                             list="titleList")
 
       div.form-group.row
 
         label.col-sm-1.control-label(for='Category') Category:
         div.col-sm-5.event-dropdown-container
+          datalist#categoryList
           input.form-select(name="Category" 
-                            placeholder="" 
+                            placeholder="Used to group events by colour." 
                             readonly=locked
                             value=event["Category"]
                             list="categoryList")
-          datalist#categoryList
 
         label.col-sm-1.control-label(for='Host') Host:
         div.col-sm-5
+          datalist#hostList
           input.form-select(name="Host" 
-                            placeholder="" 
+                            placeholder="Name of the host." 
                             readonly=locked
                             value=event["Host"]
                             list="hostList")
-          datalist#hostList
-
 
       div.form-group.row
 
@@ -106,8 +107,9 @@ block content
           div.tui-datepicker-input
             input#start.form-control(type="text" 
                                      name="Start" 
-                                     placeholder="" 
+                                     placeholder="Click to select date/time." 
                                      readonly=locked
+                                     autocomplete="off"
                                      value=event["Start"])
             div#startWrap(style="margin-top: -1px;")
             span.tui-ico-date
@@ -117,8 +119,9 @@ block content
           div.tui-datepicker-input
             input#end.form-control(type="text" 
                                    name="End" 
-                                   placeholder="" 
+                                   placeholder="Click to select date/time." 
                                    readonly=locked
+                                   autocomplete="off"
                                    value=event["End"])
             div#endWrap(style="margin-top: -1px;")
             span.tui-ico-date
@@ -127,7 +130,8 @@ block content
         div.col-sm-3
           div.tui-datepicker-input
             select#zone.form-select(name="Zone" 
-                                    placeholder="" 
+                                    placeholder="Select your timezone." 
+                                    autocomplete="off"
                                     readonly=locked) 
               option(value=event["Zone"] selected="1") #{event["Zone"]}
 
@@ -135,18 +139,20 @@ block content
 
         label.col-sm-1.control-label(for='Location') Location:
         div.col-sm-11
+          datalist#locationList
           input.form-control(type="text" 
                              name="Location" 
-                             placeholder="" 
+                             placeholder="Physical address or Zoom link." 
                              readonly=locked
-                             value=event["Location"])
+                             value=event["Location"]
+                             list="locationList")
        
       div.form-group.row
 
         label.col-sm-1.control-label(for='Description') Details:
         div.col-sm-11
           textarea.form-control(name="Description" 
-                                placeholder="" 
+                                placeholder="What your meeting is about." 
                                 readonly=locked
                                 style="height: 400px") #{event["Description"]}
       
@@ -180,7 +186,7 @@ block content
  
         if (mode === "clone")
           button.btn.event-btn-green(type="submit" name="action" value="add") 
-            |Create event
+            |Clone event
           button.btn.event-btn-grey(type="submit" name="action" value="view") 
             |Cancel
  
@@ -203,4 +209,6 @@ block scripts
   script(src='/js/moment-timezone.min.js')
   script(src='/js/tui-time-picker.min.js')
   script(src='/js/tui-date-picker.min.js')
-  script(src='/js/app-event.js')
+  
+  if (mode === "new" || mode === "update" || mode === "clone")
+    script(src='/js/app-event.js')
