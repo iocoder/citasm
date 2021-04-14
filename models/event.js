@@ -5,6 +5,7 @@ var EventModel = [
   "Title",
   "Category",
   "Host",
+  "Logo",
   "Start",
   "End",
   "Zone",

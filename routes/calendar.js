@@ -1,5 +1,6 @@
 /* libraries */
 var express = require('express');
+var multer  = require('multer');
 
 /* create a router */
 var router = express.Router();
@@ -194,7 +195,24 @@ router.get('/restore', async function(req, res, next) {
   }
 });
 
-/* Perform action */
+/* Retrieve HTML with form to upload a file */
+router.get('/upload', async function(req, res, next) {
+  try {
+    /* parameters to be passed to the HTML renderer */
+    res.locals.calendar = 'active';
+    res.locals.mode     = req.query.name == undefined ? 'upload' : 'uploaded';
+    res.locals.name     = req.query.name;
+    res.locals.url      = req.query.url;
+
+    /* render HTML page as response */
+    res.render('upload');
+  } catch (err) {
+    /* passes errors into the error handler */
+    return next(err);
+  }
+});
+
+/* Perform action (GET request) */
 router.get('/req', async function(req, res, next) {
   try {
     /* variable to hold requested event */
@@ -271,6 +289,29 @@ router.get('/req', async function(req, res, next) {
       event["Status"] = "Deleted";
       event = await req.app.get('event_ctrl').set_event(req.query.ID, event);
       nextURL = "/calendar/view?id=" + event["ID"] + "&msg=disabled";
+    }
+
+    /* redirect to next URL */
+    res.redirect(nextURL);
+  } catch (err) {
+    /* passes errors into the error handler */
+    return next(err);
+  }
+});
+
+/* Perform action (POST request) */
+router.post('/req', multer().single('logo'), async function(req, res, next) {
+  try {
+    /* variable to hold uploaded file URL */
+    var fileURL;
+
+    /* redirection URL*/
+    var nextURL;
+
+    /* go to calendar */
+    if (req.body.action === 'upload') {
+      fileURL = await req.app.get('file_ctrl').upload(req.body.name, req.file);
+      nextURL = "/calendar/upload?name=" + req.body.name + "&url=" + fileURL;
     }
 
     /* redirect to next URL */

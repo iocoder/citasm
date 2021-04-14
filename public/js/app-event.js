@@ -58,6 +58,18 @@ eventList.forEach(function(event) {
   }
 });
 
+var logoList = document.getElementById('logoList');
+var logoMap  = {}
+eventList.forEach(function(event) {
+  if (event["Logo"] !== "" && logoMap[event["Logo"]] == null) {
+    var opt = document.createElement('option');
+    opt.value     = event["Logo"];
+    opt.innerHTML = event["Logo"];
+    logoList.appendChild(opt);
+    logoMap[event["Logo"]] = true;
+  }
+});
+
 var zoneList = document.getElementById('zone');
 var zoneDefault = zoneList.options[0];
 if (zoneDefault.innerHTML === "") {
@@ -84,3 +96,16 @@ eventList.forEach(function(event) {
     locationMap[event["Location"]] = true;
   }
 });
+
+if ($('#logoURL')[0].value === "") {
+  $('#logoImage').css({'display': 'none'});
+}
+
+function updateLogo() {
+  $('#logoImage').css({'display': 'block'});
+  $('#logoImage').attr({'src': $('#logoURL')[0].value});
+}
+
+function uploadLogo() {
+  window.open('/calendar/upload','_blank');
+}

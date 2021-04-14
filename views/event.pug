@@ -68,6 +68,11 @@ block content
                              readonly=true
                              value=event["Status"])
 
+      if (!locked || event["Logo"] !== "")
+        div#logoContainer.form-group.row()
+           div#logoSpace.col-sm-1
+           img#logoImage.col-sm-11(style="height: 200px; object-fit: contain;" src=event["Logo"])
+
       div.form-group.row
 
         label.col-sm-1.control-label(for='Title') Title:
@@ -99,6 +104,27 @@ block content
                             readonly=locked
                             value=event["Host"]
                             list="hostList")
+
+      div.form-group.row
+
+        label.col-sm-1.control-label(for='Logo') Logo:
+        div.col-sm
+          datalist#logoList
+          input#logoURL.form-control(type="text" 
+                                     name="Logo" 
+                                     placeholder="Click to choose a logo URL." 
+                                     readonly=locked
+                                     value=event["Logo"]
+                                     list="logoList"
+                                     onchange="updateLogo();"
+                                     onkeydown="updateLogo();"
+                                     onpaste="updateLogo();"
+                                     oninput="updateLogo();")
+        if (!locked)
+          label.col-sm-1.control-label Or:
+          div.col-sm-3
+            button.btn.event-btn-blue(type="button" onclick="uploadLogo();")
+              | Upload logo
 
       div.form-group.row
 

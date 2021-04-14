@@ -1,0 +1,59 @@
+extends layout
+
+block content
+
+  div(style="margin-left: 3rem; margin-right: 3rem;")
+
+    h2.text-center.event-heading
+      div.event-icon.event-icon-upload
+      span Upload Logo for your Meetings
+
+    if (mode === "uploaded")
+      div.alert.alert-success
+        |File has been uploaded successfully. Click on the button to copy
+        |the URL to clipboard and return back to your form to paste it there.
+
+    form.form-horizontal(action="/calendar/req" 
+                         method="POST"
+                         enctype="multipart/form-data")
+
+      div.form-group.row
+
+        label.col-sm-2.control-label(for='name') File name:
+        div.col-sm-10
+          input.form-control(type="text" 
+                             name="name" 
+                             readonly=(mode === "uploaded")
+                             value=name
+                             placeholder="Name for your logo (ex: ca_xyz).")
+
+      div.form-group.row
+
+        if (mode === "upload")
+          label.col-sm-2.control-label(for='logo') File to upload:
+          div.col-sm-10
+            input.form-control(type="file" name="logo")
+
+        if (mode === "uploaded")
+          label.col-sm-2.control-label(for='url') File URL:
+          div.col-sm-10
+            input#url.form-control(type="text" name="url" value=url readonly)
+        
+      div.form-group.text-center
+
+        if (mode === "upload")
+          button.btn.event-btn-green(type="submit" name="action" value="upload") 
+            |Upload file
+
+        if (mode === "uploaded")
+          button.btn.event-btn-green(type="button" onclick="copyAndClose();") 
+            |Copy URL
+
+block scripts
+  script(src='/js/moment.min.js')
+  script(src='/js/moment-timezone.min.js')
+  script(src='/js/tui-time-picker.min.js')
+  script(src='/js/tui-date-picker.min.js')
+  
+  if (mode === "uploaded")
+    script(src='/js/app-upload.js')

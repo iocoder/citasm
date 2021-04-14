@@ -333,7 +333,7 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*  CUSTOMIZE EVENTT FORM                             */
+/*  CUSTOMIZE EVENT FORM                             */
 /* -------------------------------------------------- */
 
 .form-group {
@@ -378,6 +378,9 @@ body {
 }
 .event-icon-restore {
   background-image: url("/images/event-restore.png");
+}
+.event-icon-upload {
+  background-image: url("/images/event-upload.png");
 }
 
 /* read-only fields */

@@ -3,6 +3,8 @@ var express      = require('express');
 var logger       = require('morgan');
 var httperr      = require('http-errors');
 var csvdb        = require("csv-database");
+var bodyParser   = require('body-parser');
+var multer       = require('multer');
 
 /* create Express application */
 var app = express();
@@ -12,6 +14,7 @@ app.set('event_model', require('./models/event.js'));
 
 /* controllers */
 app.set('event_ctrl', require('./controllers/event.js'));
+app.set('file_ctrl',  require('./controllers/file.js'));
 
 /* views */
 app.set('view engine', 'pug');
@@ -19,6 +22,10 @@ app.set('views',       __dirname + '/views');
 
 /* static */
 app.use(express.static(__dirname + '/public'));
+
+/* for POST requests */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /* routes */
 app.use('/',          require('./routes/index'));
